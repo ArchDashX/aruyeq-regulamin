@@ -1,34 +1,37 @@
+<!-- plik: index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legal Information | ARUYEQ</title>
-    
+    <meta name="description" content="ARUYEQ - Terms of Service and Privacy Policy">
+    <title>Legal | ARUYEQ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --bg-paper: #fbfbf9;
-            --text-main: #2c2c2c;
-            --text-muted: #6b6b6b;
-            --navy: #23236b;
+            --bg-base: #faf9f6;
+            --text-main: #1a1a1a;
+            --text-muted: #555555;
+            --navy: #2b2b8a;
             --navy-light: #3a3aa0;
+            --red: #c8102e;
             --white: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --border-light: rgba(0, 0, 0, 0.06);
+            --surface: #ffffff;
+            --border-color: #eaeaea;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
+            --radius: 12px;
             --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-            --shadow-premium: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0,0,0,0.02);
-            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition: all 0.2s ease;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-main);
-            background-color: var(--bg-paper);
+            background-color: var(--bg-base);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -41,199 +44,123 @@
             overflow-x: hidden;
         }
 
-        /* --- TŁO --- */
-        .bg-decorations {
-            position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f0eb 100%);
-        }
-        .glow {
-            position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(209, 18, 48, 0.05) 0%, transparent 60%);
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            animation: pulseGlow 8s ease-in-out infinite alternate;
-        }
-        .glow-navy {
-            position: absolute; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(35, 35, 107, 0.04) 0%, transparent 60%);
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            animation: pulseGlow 10s ease-in-out infinite alternate-reverse;
-        }
-        @keyframes pulseGlow {
-            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.5; }
-            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-        }
+        .bg-decor { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f0eb 100%); }
+        
+        .bg-circle { position: absolute; border: 1px solid rgba(43, 43, 138, 0.06); border-radius: 50%; }
+        .bg-circle:nth-child(1) { width: 400px; height: 400px; top: -150px; left: -150px; border-color: rgba(200, 16, 46, 0.04); }
+        .bg-circle:nth-child(2) { width: 500px; height: 200px; bottom: -80px; right: -150px; transform: rotate(-15deg); }
+
         .bg-waves {
             position: absolute; bottom: 0; left: 0; right: 0; height: 250px; opacity: 0.4;
             background-image: 
-                radial-gradient(circle at 50% 100%, transparent 20px, rgba(35, 35, 107, 0.1) 21px, transparent 22px) 0 0 / 40px 20px,
-                radial-gradient(circle at 50% 100%, transparent 20px, rgba(209, 18, 48, 0.06) 21px, transparent 22px) 20px 0 / 40px 20px;
+                radial-gradient(circle at 50% 100%, transparent 20px, rgba(43, 43, 138, 0.08) 21px, transparent 22px) 0 0 / 40px 20px,
+                radial-gradient(circle at 50% 100%, transparent 20px, rgba(200, 16, 46, 0.05) 21px, transparent 22px) 20px 0 / 40px 20px;
         }
 
-        /* --- KARTA --- */
         .card {
-            width: 100%; max-width: 520px; 
-            background: var(--card-bg);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-radius: 16px;
-            box-shadow: var(--shadow-premium);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.8);
-            position: relative; z-index: 1;
-            display: flex; flex-direction: column;
+            width: 100%; max-width: 600px; background: var(--surface);
+            padding: 3rem 2.5rem; border-radius: var(--radius);
+            box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);
+            position: relative; z-index: 1; display: flex; flex-direction: column;
             max-height: 85vh;
-            opacity: 0; animation: cardEntry 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        @keyframes cardEntry { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- ZAKŁADKI (TABS) --- */
-        .modal-tabs {
-            display: flex; border-bottom: 1px solid var(--border-light);
-            background: #fcfcfc; border-radius: 16px 16px 0 0;
-            flex-shrink: 0;
-        }
-        .tab-btn {
-            flex: 1; padding: 1.2rem; background: none; border: none;
-            font-family: var(--font-main); font-weight: 600; font-size: 0.95rem;
-            color: #777; cursor: pointer; transition: all 0.2s;
-            border-bottom: 2px solid transparent;
-        }
-        .tab-btn:hover { color: var(--navy); background: #f4f4f4; }
-        .tab-btn.active {
-            color: var(--navy); border-bottom-color: var(--navy);
-            background: transparent;
         }
 
-        /* --- TREŚĆ --- */
-        .modal-body {
-            padding: 2.5rem 2rem; overflow-y: auto; flex: 1;
-        }
-        .tab-content { display: none; animation: fadeUp 0.4s ease-out; }
-        .tab-content.active { display: block; }
+        .header { text-align: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; flex-shrink: 0; }
+        .brand { font-size: 1.5rem; font-weight: 800; color: var(--navy); letter-spacing: 4px; margin-bottom: 0.2rem; }
+        .tagline { font-size: 0.75rem; color: var(--red); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
 
-        .modal-body h2 { color: var(--navy); font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .modal-body h3 { color: var(--navy); font-size: 1.05rem; margin-top: 2rem; margin-bottom: 0.8rem; }
-        .modal-body p, .modal-body ul { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
-        .modal-body ul { padding-left: 1.5rem; }
-        .modal-body li { margin-bottom: 0.5rem; }
-        .modal-body strong { color: var(--text-main); }
+        .content-scroll { overflow-y: auto; padding-right: 10px; flex: 1; }
+        .content-scroll::-webkit-scrollbar { width: 6px; }
+        .content-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .content-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .content-scroll::-webkit-scrollbar-thumb:hover { background: #aaa; }
 
-        /* --- STOPKA / PRZYCISK POWROTU --- */
-        .card-footer {
-            padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.6);
-            border-top: 1px solid var(--border-light);
-            text-align: center;
-            flex-shrink: 0;
-        }
+        h2 { color: var(--text-main); font-size: 1.2rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.8rem; }
+        h2:first-child { margin-top: 0; }
+        h3 { color: var(--text-main); font-size: 1rem; font-weight: 600; margin-top: 1.2rem; margin-bottom: 0.5rem; }
+        p, ul { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
+        ul { padding-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        strong { color: var(--text-main); }
+        a { color: var(--navy); text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+
+        .footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); text-align: center; flex-shrink: 0; }
         .back-btn {
-            display: inline-block;
-            padding: 0.9rem 2.5rem;
-            background: var(--navy);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition-smooth);
-            cursor: pointer;
-            border: none;
+            display: inline-block; padding: 0.8rem 2rem; background: var(--navy); color: var(--white);
+            text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: var(--transition);
         }
-        .back-btn:hover {
-            background: var(--navy-light);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(35, 35, 107, 0.2);
-        }
+        .back-btn:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: var(--shadow-sm); text-decoration: none; }
 
         @media (max-width: 480px) {
-            .card { max-height: 90vh; }
-            .modal-body { padding: 1.5rem; }
-            .tab-btn { padding: 1rem 0.5rem; font-size: 0.85rem; }
+            .card { padding: 2rem 1.5rem; }
+            h2 { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
-
-    <div class="bg-decorations" aria-hidden="true">
-        <div class="glow"></div>
-        <div class="glow-navy"></div>
+    <div class="bg-decor" aria-hidden="true">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
         <div class="bg-waves"></div>
     </div>
 
     <main class="card">
-        <!-- ZAKŁADKI -->
-        <div class="modal-tabs">
-            <button class="tab-btn active" data-target="terms" onclick="switchTab('terms')">Terms of Service</button>
-            <button class="tab-btn" data-target="privacy" onclick="switchTab('privacy')">Privacy Policy</button>
+        <header class="header">
+            <div class="brand">ARUYEQ</div>
+            <div class="tagline">Legal Information</div>
+        </header>
+
+        <div class="content-scroll">
+            <h2>Terms of Service</h2>
+            <p><strong>Last updated:</strong> 2026</p>
+
+            <h3>1. General Provisions</h3>
+            <p>These Terms of Service govern the use of the ARUYEQ website. This site is purely informational (a "link-in-bio" page) and does not sell products or require registration.</p>
+
+            <h3>2. Copyright & Intellectual Property</h3>
+            <p><strong>&copy; 2026 ARUYEQ. All rights reserved.</strong></p>
+            <ul>
+                <li>All content, including source code (HTML, CSS, JS), graphic design (bridge, sun), and text, is the property of the ARUYEQ creator.</li>
+                <li>Copying, modifying, or distributing the code and graphics without written permission from the author is strictly prohibited.</li>
+                <li>The logo design is a trademark of the creator.</li>
+            </ul>
+
+            <h3>3. Limitation of Liability</h3>
+            <p>The website is provided "as-is". The creator is not liable for any damages resulting from the use of external links or any errors in the operation of the code.</p>
+
+            <h3>4. External Links</h3>
+            <p>This site contains links to third-party platforms (X, YouTube, GitHub, Discord, etc.). Once you click a link, you leave our site and enter a service with its own terms. We are not responsible for the practices of these services.</p>
+
+            <h3>5. Changes to Terms</h3>
+            <p>We reserve the right to modify these terms at any time. Changes take effect immediately upon posting on this page.</p>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+            <h2>Privacy Policy</h2>
+            <p><strong>Last updated:</strong> 2026</p>
+
+            <h3>1. What Data Do We Collect?</h3>
+            <p>This website is designed with maximum privacy in mind. <strong>We do not collect, store, or process any of your personal data</strong> (such as name, email address, or IP address).</p>
+            <ul>
+                <li>We do not use tracking cookies.</li>
+                <li>We do not use external analytics tools (e.g., Google Analytics).</li>
+                <li>All animations and backgrounds are generated locally in your browser.</li>
+            </ul>
+
+            <h3>2. External Links</h3>
+            <p>Our site contains links to external platforms. Once you click a link, you leave our site and enter a service with its own independent Privacy Policy. We are not responsible for the practices of these services.</p>
+
+            <h3>3. Security</h3>
+            <p>Although we do not collect data, we use modern security practices (e.g., password hashing for the admin panel) to protect the integrity of the site.</p>
+
+            <h3>4. Contact</h3>
+            <p>If you have any privacy-related questions, please reach out via one of the provided channels (e.g., Discord: @aruyeq).</p>
         </div>
 
-        <!-- TREŚĆ -->
-        <div class="modal-body">
-            <!-- TERMS OF SERVICE -->
-            <div id="tab-terms" class="tab-content active">
-                <h2>Terms of Service</h2>
-                <p><strong>Last updated:</strong> 2026</p>
-
-                <h3>1. General Provisions</h3>
-                <p>These Terms of Service govern the use of the ARUYEQ website. This site is purely informational (a "link-in-bio" page) and does not sell products or require registration.</p>
-
-                <h3>2. Copyright & Intellectual Property</h3>
-                <p><strong>&copy; 2026 ARUYEQ. All rights reserved.</strong></p>
-                <ul>
-                    <li>All content, including source code (HTML, CSS, JS), graphic design (bridge, sun), and text, is the property of the ARUYEQ creator.</li>
-                    <li>Copying, modifying, or distributing the code and graphics without written permission from the author is strictly prohibited.</li>
-                    <li>The logo design is a trademark of the creator.</li>
-                </ul>
-
-                <h3>3. Limitation of Liability</h3>
-                <p>The website is provided "as-is". The creator is not liable for any damages resulting from the use of external links or any errors in the operation of the code.</p>
-
-                <h3>4. External Links</h3>
-                <p>This site contains links to third-party platforms (X, YouTube, GitHub, Discord, etc.). Once you click a link, you leave our site and enter a service with its own terms. We are not responsible for the practices of these services.</p>
-
-                <h3>5. Changes to Terms</h3>
-                <p>We reserve the right to modify these terms at any time. Changes take effect immediately upon posting on this page.</p>
-            </div>
-
-            <!-- PRIVACY POLICY -->
-            <div id="tab-privacy" class="tab-content">
-                <h2>Privacy Policy</h2>
-                <p><strong>Last updated:</strong> 2026</p>
-
-                <h3>1. What Data Do We Collect?</h3>
-                <p>This website is designed with maximum privacy in mind. <strong>We do not collect, store, or process any of your personal data</strong> (such as name, email address, or IP address).</p>
-                <ul>
-                    <li>We do not use tracking cookies.</li>
-                    <li>We do not use external analytics tools (e.g., Google Analytics).</li>
-                    <li>All animations and backgrounds are generated locally in your browser.</li>
-                </ul>
-
-                <h3>2. External Links</h3>
-                <p>Our site contains links to external platforms. Once you click a link, you leave our site and enter a service with its own independent Privacy Policy. We are not responsible for the practices of these services.</p>
-
-                <h3>3. Security</h3>
-                <p>Although we do not collect data, we use modern security practices (e.g., password hashing for the admin panel) to protect the integrity of the site.</p>
-
-                <h3>4. Contact</h3>
-                <p>If you have any privacy-related questions, please reach out via one of the provided channels (e.g., Discord: @aruyeq).</p>
-            </div>
-        </div>
-
-        <!-- PRZYCISK POWROTU (Wymusza przekierowanie w JS) -->
-        <div class="card-footer">
-            <button onclick="window.location.href='https://archdashx.github.io/aruyeq/'" class="back-btn">&larr; Back to Profile</button>
-        </div>
+        <footer class="footer">
+            <a href="https://archdashx.github.io/aruyeq/" class="back-btn">&larr; Back to Profile</a>
+        </footer>
     </main>
-
-    <script>
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById('tab-' + tabId).classList.add('active');
-            document.querySelector('.tab-btn[data-target="' + tabId + '"]').classList.add('active');
-        }
-    </script>
-
 </body>
 </html>
