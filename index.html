@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legal Info | ARUYEQ</title>
+    <title>Legal Information | ARUYEQ</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,7 @@
             --red: #d11230;
             --white: #ffffff;
             --card-bg: rgba(255, 255, 255, 0.85);
+            --border-light: rgba(0, 0, 0, 0.06);
             --font-main: 'Inter', system-ui, -apple-system, sans-serif;
             --shadow-premium: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0,0,0,0.02);
             --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -35,13 +36,13 @@
             justify-content: center;
             align-items: center;
             padding: 2rem 1rem;
-            overflow-x: hidden;
-            position: relative;
-            line-height: 1.5;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- TŁO (Identyczne jak na stronie głównej) --- */
+        /* --- IDENTYCZNE TŁO --- */
         .bg-decorations {
             position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
             background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f0eb 100%);
@@ -69,15 +70,18 @@
                 radial-gradient(circle at 50% 100%, transparent 20px, rgba(209, 18, 48, 0.06) 21px, transparent 22px) 20px 0 / 40px 20px;
         }
 
-        /* --- KARTA (Identyczna jak na stronie głównej) --- */
+        /* --- IDEALNIE SPASOWANA KARTA --- */
         .card {
-            width: 100%; max-width: 500px; background: var(--card-bg);
+            width: 100%; max-width: 520px; /* Odpowiednia szerokość dla tekstu prawnego */
+            background: var(--card-bg);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
-            box-shadow: var(--shadow-premium); border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: var(--shadow-premium);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-top: 1px solid rgba(255, 255, 255, 0.8);
             position: relative; z-index: 1;
-            overflow: hidden;
+            display: flex; flex-direction: column;
+            max-height: 85vh; /* Zapobiega wychodzeniu poza ekran */
             opacity: 0; animation: cardEntry 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
         @keyframes cardEntry { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
@@ -88,15 +92,16 @@
             position: absolute; top: 1.5rem; right: 1.5rem; width: 34px; height: 34px;
             border: 2px solid var(--red); border-radius: 6px;
             display: flex; align-items: center; justify-content: center;
-            transform: rotate(6deg); opacity: 0; animation: fadeUp 0.6s ease-out 0.8s forwards;
-            z-index: 10;
+            transform: rotate(6deg); z-index: 10;
+            opacity: 0; animation: fadeUp 0.6s ease-out 0.8s forwards;
         }
         .seal::before { content: ''; width: 14px; height: 14px; background-color: var(--red); border-radius: 3px; transform: rotate(45deg); }
 
-        /* --- ZAKŁADKI --- */
+        /* --- ZAKŁADKI (TABS) --- */
         .modal-tabs {
-            display: flex; border-bottom: 1px solid #eee;
-            background: #fcfcfc; position: relative;
+            display: flex; border-bottom: 1px solid var(--border-light);
+            background: #fcfcfc; border-radius: 16px 16px 0 0;
+            flex-shrink: 0;
         }
         .tab-btn {
             flex: 1; padding: 1.2rem; background: none; border: none;
@@ -110,34 +115,35 @@
             background: transparent;
         }
 
-        /* --- TREŚĆ --- */
+        /* --- TREŚĆ (Z naturalnym przewijaniem) --- */
         .modal-body {
-            padding: 2.5rem 2rem; max-height: 60vh; overflow-y: auto;
+            padding: 2.5rem 2rem; overflow-y: auto; flex: 1; /* Flex 1 pozwala na scrollowanie */
         }
         .tab-content { display: none; animation: fadeUp 0.4s ease-out; }
         .tab-content.active { display: block; }
 
-        .modal-body h2 { color: var(--navy); font-size: 1.3rem; margin-bottom: 1rem; }
-        .modal-body h3 { color: var(--navy); font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-        .modal-body p, .modal-body ul { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+        .modal-body h2 { color: var(--navy); font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .modal-body h3 { color: var(--navy); font-size: 1.05rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+        .modal-body p, .modal-body ul { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
         .modal-body ul { padding-left: 1.5rem; }
         .modal-body li { margin-bottom: 0.5rem; }
         .modal-body strong { color: var(--text-main); }
 
-        /* --- PRZYCISK POWROTU --- */
-        .back-btn-wrapper {
+        /* --- STOPKA / PRZYCISK POWROTU --- */
+        .card-footer {
             padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid var(--border-light);
             text-align: center;
+            flex-shrink: 0;
         }
         .back-btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
+            padding: 0.9rem 2.5rem;
             background: var(--navy);
             color: var(--white);
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
             font-size: 0.9rem;
             transition: var(--transition-smooth);
@@ -149,7 +155,7 @@
         }
 
         @media (max-width: 480px) {
-            .card { border-radius: 12px; }
+            .card { max-height: 90vh; }
             .modal-body { padding: 1.5rem; }
             .tab-btn { padding: 1rem 0.5rem; font-size: 0.85rem; }
         }
@@ -225,7 +231,7 @@
         </div>
 
         <!-- PRZYCISK POWROTU -->
-        <div class="back-btn-wrapper">
+        <div class="card-footer">
             <a href="index.html" class="back-btn">&larr; Back to Profile</a>
         </div>
     </main>
