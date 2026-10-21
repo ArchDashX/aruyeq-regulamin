@@ -136,6 +136,8 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
         }
         .back-btn:hover {
             background: var(--navy-light);
@@ -217,9 +219,9 @@
             </div>
         </div>
 
-        <!-- PRZYCISK POWROTU NA STRONĘ GŁÓWNĄ -->
+        <!-- PRZYCISK POWROTU (Wymusza przekierowanie w JS) -->
         <div class="card-footer">
-            <a href="https://archdashx.github.io/aruyeq/" class="back-btn">&larr; Back to Profile</a>
+            <button onclick="window.location.href='https://archdashx.github.io/aruyeq/'" class="back-btn">&larr; Back to Profile</button>
         </div>
     </main>
 
